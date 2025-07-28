@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f6f6f6;
+      padding: 20px;
+      direction: rtl;
+    }
+    .email-container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    .header {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    .footer {
+      font-size: 12px;
+      color: #888;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header">שלום {{ first_name }},</div>
+    <p>תודה שנרשמת לאתר מורי הדרך שלנו! 💼</p>
+    <p>נשמח לשתף אותך בפעילויות, סיורים, ועדכונים רלוונטיים בהמשך.</p>
+
+    <p>
+      🔗 <a href="{% url 'home' %}">מעבר לדף הבית</a><br>
+      ➕ <a href="{% url 'create_tour' %}">יצירת טיול חדש</a>
+    </p>
+
+    <p>בהצלחה ובברכה,<br>צוות האתר 🌍</p>
+    <div class="footer">אם קיבלת מייל זה בטעות, אין צורך לנקוט פעולה.</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Varela Round', sans-serif;
+}
+
+.card {
+    border-radius: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 15px;
+    background: #fff;
+    width: 100%;
+    max-width: 100%;
+}
+
+.present {
+    background-color: #d4edda !important;
+    border-color: #c3e6cb;
+}
+
+.tour_guide_phone-icon {
+    color: red;
+    margin-right: 5px;
+}
+
+.tour_guide_phone-icon:hover {
+    color: darkred;
+}
+
+.presence-label {
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.btn-scan {
+    background-color: #28a745;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.btn-scan:hover {
+    background-color: #218838;
+}
+
+#reader {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 576px) {
+    .participant-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .participant-row strong,
+    .participant-row small {
+        font-size: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

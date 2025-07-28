@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load custom_filters static  %}
+{% block extra_head %}
+{% endblock %}
+{% block title %}דף הבית - Travel2Go{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<div class="container mt-4">
+  <div class="section-border">
+    <section class="hero-section">
+      <div class="hero-bg" style="background-image: url('{% static "img/trvael.png" %}');"></div>
+      <div class="hero-bg" style="background-image: url('{% static "img/negev.jpg" %}');"></div>
+      <div class="hero-bg" style="background-image: url('{% static "img/jordan_river.png" %}');"></div>
+
+      <div class="hero-content">
+        <h1 class="mb-4 headline-green">Travel2Go – חוויה ישראלית עשירה ומרתקת</h1>
+        <div id="animated-sentences" class="animated-text lead lead-paragraph"></div>
+        <h2 class="subheadline-green">מה בתכנון ? הצצה למסלולים הכי שווים שלנו</h2>
+      </div>
+    </section>
+  </div>
+
+<!-- טופס חיפוש מעוצב ורספונסיבי -->
+<div class="container-fluid" dir="rtl">
+  <form method="get" class="row g-3 mb-4 align-items-end search-form-custom">
+    <div class="col-12 col-md-3">
+      <label for="q" class="form-label">חיפוש לפי טיול</label>
+      <input type="text" name="q" id="q" value="{{ query }}" class="form-control" placeholder="כותרת, תיאור...">
+    </div>
+    <div class="col-12 col-md-3">
+      <label for="guide" class="form-label">חיפוש לפי מדריך</label>
+      <input type="text" name="guide" id="guide" value="{{ guide }}" class="form-control" placeholder="שם פרטי של המדריך">
+    </div>
+    <div class="col-12 col-md-3">
+      <label for="date" class="form-label">חיפוש לפי תאריך</label>
+      <input type="date" name="date" id="date" value="{{ date }}" class="form-control">
+    </div>
+    <div class="col-12 col-md-3 d-flex align-items-end">
+      <button type="submit" class="btn btn-primary w-100 rounded-pill px-4">חפש</button>
+    </div>
+  </form>
+</div>
+
+  <!-- הצגת סיורים -->
+  {% if tours %}
+    {% for tour in tours %}
+      <div class="card tour-card tour-card-bg-{{ forloop.counter0|divisibleby:5|yesno:'0,1,2,3,4'|cut:',' }} mb-4">
+        <img src="{{ tour.tour_image.url }}" alt="תמונה" class="tour-image">
+        <div class="card-body text-center">
+          <h1 class="h4 text-primary mb-2">{{ tour.tour_title }}</h1>
+          <h2 class="h6 text-muted mb-4">{{ tour.tour_subtitle }}</h2>
+
+          <ul class="list-group list-group-flush mb-4">
+            <li class="list-group-item">📅 <strong>תאריך:</strong> {{ tour.tour_date }}</li>
+            <li class="list-group-item">📍 <strong>מקום המפגש:</strong> {{ tour.meeting_point }}</li>
+            <li class="list-group-item">🕒 <strong>שעת התחלה:</strong> {{ tour.tour_start_time }}</li>
+            <li class="list-group-item">
+              👤 <strong>מדריך:</strong>
+              {% if tour.tour_guide_name %}
+                <a href="{% url 'guide_detail' guide_id=tour.tour_guide_name.id %}">{{ tour.tour_guide_name }}</a>
+              {% else %}
+                לא הוזן
+              {% endif %}
+            </li>
+            <li class="list-group-item">💰 <strong>עלות:</strong> {{ tour.tour_price }} ₪</li>
+          </ul>
+
+          {% if tour.is_full %}
+            <div class="alert alert-danger text-center" role="alert">
+              ההרשמה מלאה
+            </div>
+          {% endif %}
+          <div class="d-flex justify-content-center mt-3">
+              <a href="{% url 'tour_detail' tour.pk %}" class="btn-green">לצפייה בפרטי הסיור</a>
+            </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="text-center mt-5">
+      <h2 class="text-muted">אין סיורים זמינים כרגע 😕</h2>
+    </div>
+  {% endif %}
+
+</div>
+<script src="{% static 'js/hero-background.js' %}"></script>
+{% endblock %}

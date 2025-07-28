@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}דאשבורד סיורים{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'css/tour_dashboard.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">🎒 דאשבורד סיורים</h1>
+
+    <div class="text-end mb-4">
+        <a href="{% url 'create_tour' %}" class="btn btn-success">➕ הוסף סיור חדש</a>
+    </div>
+
+    {% for tour in tours %}
+    <div class="card tour-card">
+        <div class="card-body">
+            <h2 class="tour-title">{{ tour.כותרת_ראשית }}</h2>
+            <p class="tour-meta"><strong>תאריך:</strong> {{ tour.tour_date }} | <strong>שעה:</strong> {{ tour.tour_start_time }}</p>
+            <p class="tour-meta"><strong>מיקום:</strong> {{ tour.meeting_point }}</p>
+           <p class="tour-meta"><strong>מדריך:</strong> {{ tour.tour_guide_name.tour_guide_first_name }} {{ tour.tour_guide_name.tour_guide_last_name }}</p>
+
+
+            <div class="mt-3">
+                <a href="{% url 'edit_tour' tour.id %}" class="btn btn-primary btn-sm">✏️ ערוך</a>
+                <a href="{% url 'delete_tour' tour.id %}" class="btn btn-danger btn-sm" onclick="return confirm('האם אתה בטוח שברצונך למחוק את הסיור?')">🗑️ מחק</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-warning text-center">אין סיורים להצגה.</div>
+    {% endfor %}
+</div>
+{% endblock %}

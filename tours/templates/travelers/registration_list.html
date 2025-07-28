@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}רשימת נרשמים{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'css/registration_list.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container wide-container py-4">
+    <h1 class="text-center mb-4">📋 רשימת נרשמים</h1>
+
+    <!-- חיפוש -->
+    <div class="d-flex justify-content-center mb-4">
+        <input type="text" id="searchInput" class="form-control search-box" placeholder="חפש לפי שם, ת\"ז או טלפון...">
+    </div>
+
+    {% for tour in tours %}
+        <a href="{% url 'participants_list' %}?tour_id={{ tour.id }}" class="btn btn-outline-secondary mt-2">
+            📋 קישור לרשימת המשתתפים של {{ tour.שם_מדריך }}
+        </a>
+
+        <div class="table-container mb-4">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                    <strong>{{ tour.tour_title }}</strong> |
+                    {{ tour.תאריך }} |
+                    מדריך: {{ tour.שם_מדריך }} |
+                    {{ tour.registrations.count }} נרשמים
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="{% url 'send_reminder_per_tour' tour.id %}" class="btn btn-light btn-sm">
+                        <i class="bi bi-envelope"></i> שלח מייל
+                    </a>
+                    <a href="{% url 'download_tour_excel' tour.id %}" class="btn btn-success btn-sm">
+                        <i class="bi bi-download"></i> ייצוא ל-Excel
+                    </a>
+                    {% if tour.whatsapp_link %}
+                        <a href="{{ tour.whatsapp_link }}" target="_blank" class="btn btn-success btn-sm">
+                            <i class="bi bi-whatsapp"></i> WhatsApp
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card-body p-0">
+                {% if tour.registrations.all %}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered m-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>שם פרטי</th>
+                                    <th>שם משפחה</th>
+                                    <th>טלפון</th>
+                                    <th>אימייל</th>
+                                    <th>נוכחות</th>
+                                    <th>מחיקה</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for registration in tour.registrations.all %}
+                                    <tr>
+                                        <td>{{ registration.traveler_first_name }}</td>
+                                        <td>{{ registration.traveler_last_name }}</td>
+                                        <td>{{ registration.traveler_phone }}</td>
+                                        <td>{{ registration.traveler_email }}</td>
+                                        <td>
+                                            <form method="post" action="{% url 'toggle_attendance' registration.id %}" style="display:inline;">
+                                                {% csrf_token %}
+                                                {% if registration.traveler_attendance %}
+                                                    <button type="submit" class="btn btn-success btn-sm">✅ הגיע</button>
+                                                {% else %}
+                                                    <button type="submit" class="btn btn-warning btn-sm">❌ לא הגיע</button>
+                                                {% endif %}
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="post" action="{% url 'delete_registration' registration.id %}" style="display:inline;">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('האם אתה בטוח שברצונך למחוק?')">
+                                                    מחק 🗑️
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-center py-3">אין נרשמים לסיור זה.</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/registration_list.js' %}"></script>
+{% endblock %}

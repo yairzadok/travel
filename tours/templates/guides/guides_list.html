@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}רשימת מורי דרך{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">📘 רשימת כל מורי הדרך</h2>
+
+    <div class="text-end mb-3">
+        <a href="{% url 'export_guides_excel' %}" class="btn btn-success">📤 ייצוא לאקסל</a>
+        <a href="{% url 'email_all_guides' %}" class="btn btn-primary">📧 שלח מייל לכל המדריכים</a>
+    </div>
+
+    {% if messages %}
+    <div class="alert alert-success">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>שם פרטי</th>
+                <th>שם משפחה</th>
+                <th>טלפון</th>
+                <th>אימייל</th>
+                <th>שפות</th>
+                <th>התמחויות</th>
+                <th>ניסיון</th>
+                <th>המלצות</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for guide in guides %}
+            <tr>
+                <td>{{ guide.tour_guide_first_name }}</td>
+                <td>{{ guide.tour_guide_last_name }}</td>
+                <td>{{ guide.tour_guide_phone }}</td>
+                <td>{{ guide.tour_guide_email }}</td>
+                <td>{{ guide.languages }}</td>
+                <td>{{ guide.specialties }}</td>
+                <td>{{ guide.experience }}</td>
+                <td>{{ guide.recommendations }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

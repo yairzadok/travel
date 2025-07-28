@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}רישום טיול{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'css/traveler_register.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container"
+     data-price-per-person="{{ tour.tour_price }}"
+     data-num-participants="{{ num_participants }}">
+
+
+    <div class="card">
+        <div class="card-body">
+            <h2 id="tour-title" class="text-center">{{ tour.tour_title }}</h2>
+            <h4 class="text-center mb-4">פרטי הזמנה לפני תשלום</h4>
+
+            <!-- טופס בחירת מספר משתתפים -->
+            <form method="get" class="mb-4">
+                <label for="num-participants" class="form-label">כמה משתתפים ברצונך לרשום?</label>
+                <div class="input-group">
+                    <input type="number" id="num-participants" name="num_participants"
+                           class="form-control"
+                           value="{{ num_participants|default:1 }}"
+                           min="1" max="{{ tour.max_participants }}">
+                    <button type="submit" class="btn btn-outline-primary">עדכן</button>
+                </div>
+            </form>
+
+            <!-- הצגת עלות כוללת -->
+            {% if tour.tour_price %}
+            <div class="mb-4">
+                <div id="total-cost" class="alert alert-info text-center">
+                    💰 עלות למשתתף: {{ tour.tour_price }} ₪ <br>
+                    💸 סה"כ לתשלום: <strong>{{ total_price }} ₪</strong>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- טופס הרשמה לכל משתתף -->
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="num_participants" value="{{ num_participants }}">
+                {{ formset.management_form }}
+
+                {% for form in formset %}
+                <div class="card mb-4 p-3 bg-light border">
+                    <h5 class="text-center">🧍 משתתף {{ forloop.counter }}</h5>
+                    {% for field in form %}
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        <div class="input-group">
+                            {{ field }}
+                        </div>
+                        {% if field.errors %}
+                        <div class="text-danger small">{{ field.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+
+                <!-- סה"כ לתשלום -->
+                <div class="alert alert-success text-center mt-5" id="final-total"
+                     style="font-size: 1.2rem; font-weight: bold;">
+                    💸 סה"כ לתשלום: <strong>{{ total_price }} ₪</strong>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">אישור ומעבר לתשלום</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- הערה למשתמש -->
+<div class="alert alert-warning mt-4 text-center" style="font-size: 0.95rem;">
+    🗑️ עם סיום הטיול, יימחקו נתוני המטייל ממאגר המידע באופן מלא וללא שמירה.
+</div>
+{% endblock %}
+
+{% block extra_script %}
+<script src="{% static 'js/calculate_total.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,149 @@
+body {
+    background: linear-gradient(to bottom right, #e0f7fa, #fff);
+    font-family: 'Varela Round', sans-serif;
+    text-align: center;
+    padding: 50px;
+    margin: 0;
+}
+
+/* כרטיס תוכן */
+.card {
+    max-width: 500px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    animation: fadeInUp 1s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Fade-in לכל טקסט */
+.card h1,
+.card p,
+.card a,
+.card img {
+    animation: fadeIn 1.2s ease-out forwards;
+    opacity: 0;
+}
+
+/* השהיות ייחודיות */
+.card h1 { animation-delay: 0.3s; }
+.card p { animation-delay: 0.6s; }
+.card a { animation-delay: 0.9s; }
+.card img { animation-delay: 0.1s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* כפתורים */
+.btn-custom,
+.btn-home,
+.btn-community {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 10px;
+    margin-top: 10px;
+    text-decoration: none;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-custom {
+    background-color: #007bff;
+}
+
+.btn-custom:hover {
+    background-color: #0056b3;
+    transform: scale(1.02);
+}
+
+.btn-community {
+    background-color: #28a745;
+}
+
+.btn-community:hover {
+    background-color: #218838;
+    transform: scale(1.02);
+}
+
+.btn-home {
+    background-color: #6c757d;
+}
+
+.btn-home:hover {
+    background-color: #5a6268;
+    transform: scale(1.02);
+}
+
+.btn-home:active,
+.btn-community:active,
+.btn-custom:active {
+    opacity: 0.85;
+    transform: scale(0.98);
+}
+
+/* סמל */
+.icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+/* עיצוב רספונסיבי */
+@media (max-width: 576px) {
+    body {
+        padding: 20px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .btn-custom,
+    .btn-home,
+    .btn-community {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+}
+.toast-message {
+    visibility: hidden;
+    min-width: 250px;
+    margin: 0 auto;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px;
+    position: fixed;
+    z-index: 999;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.95rem;
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.toast-message.show {
+    visibility: visible;
+    opacity: 1;
+}

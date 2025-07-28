@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">ברוך הבא למערכת הניהול</h2>
+  <p class="text-center">בחר פעולה:</p>
+
+  <div class="list-group mx-auto" style="max-width: 400px;">
+
+    <a href="{% url 'register_tour_guide' %}" class="list-group-item list-group-item-action">
+      רישום מדריך חדש
+    </a>
+    <a href="{% url 'create_tour' %}" class="list-group-item list-group-item-action">
+      יצירת סיור חדש
+    </a>
+ <a href="{% url 'tour_dashboard'  %}" class="list-group-item list-group-item-action">עריכת סיורים</a>
+
+  </div>
+</div>
+{% endblock %}

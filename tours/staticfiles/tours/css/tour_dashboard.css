@@ -1,0 +1,20 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Varela Round', sans-serif;
+    padding: 20px;
+}
+
+.tour-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.tour-title {
+    color: #007bff;
+    font-size: 1.5rem;
+}
+
+.tour-meta {
+    font-size: 0.95rem;
+}

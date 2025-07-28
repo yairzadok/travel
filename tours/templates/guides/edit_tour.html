@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}עריכת סיור{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'css/edit_tour.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">עריכת סיור - {{ tour.כותרת_ראשית }}</h1>
+    <div class="form-container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary w-100">שמור שינויים</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

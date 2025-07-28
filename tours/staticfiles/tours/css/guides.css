@@ -1,0 +1,219 @@
+
+/* בסיס כללי */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Varela Round", sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.container {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  max-width: 100%;
+}
+
+/* כותרת */
+h1 {
+  font-size: 2.2rem;
+  color: #333;
+  text-align: center;
+}
+
+/* כרטיס מדריך */
+.guide-card,
+.scroll-card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.3s ease;
+  flex: 0 0 400px;
+  width: 500px;
+  height: 600px;
+  scroll-snap-align: start;
+}
+
+.guide-card:hover,
+.scroll-card:hover {
+  transform: scale(1.02);
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #007bff;
+  margin-bottom: 15px;
+}
+
+.guide-card h4 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  color: #007bff;
+}
+
+.guide-card p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.guide-card a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.guide-card a:hover {
+  text-decoration: underline;
+}
+
+/* קישורים חברתיים */
+.social-links i {
+  transition: transform 0.3s ease;
+}
+
+.social-links i:hover {
+  transform: scale(1.2);
+}
+
+/* גלילה אופקית */
+.horizontal-scroll-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-left: 10px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* לחצני גלילה */
+.guides-wrapper {
+  position: relative;
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: none;
+  z-index: 100;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.scroll-btn:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.scroll-btn.left {
+  left: 10px;
+}
+
+.scroll-btn.right {
+  right: 10px;
+}
+
+/* מובייל */
+@media (max-width: 768px) {
+  /* הכרטיס תופס מסך מלא */
+  .scroll-card {
+    flex: 0 0 100%;
+    width: 100vw;
+    margin: 0;
+    padding: 16px;
+    border-radius: 0; /* כרטיס שטוח בקצוות המסך */
+  }
+
+  /* מניעת ריווחים וגלילה לא רצויה */
+  .horizontal-scroll-container {
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+  }
+
+  /* עיצוב תמונת פרופיל מותאם */
+  .profile-img {
+    width: 70px;
+    height: 70px;
+  }
+
+  /* כותרת קטנה יותר */
+  .guide-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  /* טקסט כללי */
+  .guide-card p {
+    font-size: 0.9rem;
+    margin: 4px 0;
+  }
+
+  /* כפתורי גלילה צמודים יותר */
+  .scroll-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+
+  .scroll-btn.left {
+    left: 5px;
+  }
+
+  .scroll-btn.right {
+    right: 5px;
+  }
+
+  /* איקונים חברתיים קטנים יותר */
+  .social-links i {
+    font-size: 1.2rem;
+    margin: 0 6px;
+  }
+
+  /* טקסט כותרת ראשית */
+  h1 {
+    font-size: 1.4rem;
+    padding: 16px 10px;
+  }
+/* סגנון מגע לכפתורים */
+.scroll-btn:active {
+  transform: translateY(-50%) scale(0.95);
+  background-color: #e0e0e0;
+}
+
+/* הדגשת כרטיס נבחר (אם משתמש בכיתוב selected) */
+.scroll-card.selected {
+  border: 2px solid #007bff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+}
+
+

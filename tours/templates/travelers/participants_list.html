@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}רשימת משתתפים - סריקת נוכחות{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{% static 'css/participants_list.css' %}" rel="stylesheet">
+    <audio id="beep-sound" src="{% static 'sounds/beep.mp3' %}" preload="auto"></audio>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <button class="btn btn-scan" onclick="startScanner()">📷 התחל סריקה</button>
+            <div id="reader" style="display:none;"></div>
+            <h4 class="text-center mb-3">
+                {{ tour.tour_title }} | מדריך: {{ tour.שם_מדריך }}
+            </h4>
+            <h3 class="text-center mb-4">רשימת משתתפים</h3>
+            <h5 class="text-center my-3" id="attendance-counter">נוכחים: 0 / 0</h5>
+
+            {% for registration in registrations %}
+                <div class="card participant-row d-flex flex-column flex-sm-row align-items-center justify-content-between"
+                     id="card_{{ registration.id }}">
+                    <div class="d-flex flex-column">
+                        <strong class="fw-bold">{{ registration.traveler_first_name }} {{ registration.traveler_last_name }}</strong>
+                        <small class="text-muted">
+                            <a href="tel:{{ registration.traveler_phone }}" class="text-decoration-none text-muted">
+                                {{ registration.traveler_phone }} <i class="fa fa-tour_guide_phone tour_guide_phone-icon"></i>
+                            </a>
+                        </small>
+                    </div>
+                    <div class="d-flex align-items-center mt-3 mt-sm-0">
+                        <label class="presence-label" for="presence_{{ registration.registration_code }}">נוכח</label>
+                        <input type="checkbox"
+                               id="presence_{{ registration.registration_code }}"
+                               {% if registration.traveler_attendance %}checked{% endif %}
+                               onchange="updateAttendance('{{ registration.id }}', this.checked)">
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center">אין משתתפים רשומים עדיין.</p>
+            {% endfor %}
+
+            <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 mt-5">
+                <button class="btn btn-primary" onclick="sendParticipantsByEmail()">📧 שלח דו״ח במייל</button>
+                <button class="btn btn-danger" onclick="clearAllPresence()">🧹 נקה את כל הסימונים</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- טוסטים -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/participants_list.js' %}"></script>
+{% endblock %}

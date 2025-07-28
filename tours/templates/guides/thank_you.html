@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}תודה על ההרשמה{% endblock %}
+
+{% block extra_head %}
+  <link href="{% static 'css/thank_you.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <img src="{% static 'img/thank_you_illustration.png' %}" alt="תודה רבה" style="max-width: 250px;" class="mb-4">
+
+<p class="lead">✉️ שלחנו אליך מייל עם פרטי ההרשמה.</p>
+
+
+    <p class="lead mt-3">
+        ההרשמה שלך נקלטה בהצלחה.<br>
+        אנו שמחים לצרף אותך לקהילת מורי הדרך שלנו.<br>
+  <div id="toast" class="toast-message">
+
+</div>
+    </p>
+
+    <div class="d-flex justify-content-center flex-column align-items-center gap-3 mt-4">
+
+        <a href="https://chat.whatsapp.com/JnypJXJEGpgJkQhLVNzNKD" target="_blank" class="btn btn-community">
+            <img src="/media/tours_images/whatsapp_icon.png" alt="WhatsApp Icon" style="width: 24px; height: 24px; margin-left: 8px;">
+            הצטרפות לקהילה
+        </a>
+
+        <a href="{% url 'home' %}" class="btn btn-home">דף הבית ורשימת הסיורים</a>
+
+    </div>
+</div>
+{% endblock %}
+<script>
+    window.addEventListener("load", () => {
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 4000);
+    });
+</script>

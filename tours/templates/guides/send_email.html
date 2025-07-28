@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}שליחת מייל לכל מורי הדרך{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">📧 שליחת מייל לכל מורי הדרך</h2>
+
+    {% if messages %}
+    <div class="alert alert-success">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="subject" class="form-label">נושא</label>
+            <input type="text" name="subject" id="subject" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">תוכן ההודעה</label>
+            <textarea name="message" id="message" class="form-control" rows="6" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">שלח מייל</button>
+        <a href="{% url 'guides_list' %}" class="btn btn-secondary">ביטול</a>
+    </form>
+</div>
+{% endblock %}

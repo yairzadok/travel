@@ -1,0 +1,35 @@
+<!-- templates/emails/registration_email_template.html -->
+<html lang="he" dir="rtl">
+<body style="font-family: 'Segoe UI'; background-color: #f0f4f8; padding: 20px;">
+  <div style="background-color: #fff; border-radius: 10px; max-width: 600px; margin: auto; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <div style="text-align: center;">
+      <img src="cid:{{ tour_image_cid }}" alt="תמונת הטיול" style="width:100%; max-height:300px; object-fit:cover; border-radius: 10px 10px 0 0; margin-bottom: 20px;">
+    </div>
+    <h2>שלום {{ first_name }} {{ last_name }},</h2>
+    <p>תודה שנרשמת לסיור: <b>{{ tour_title }}</b></p>
+    <p><b>📅 תאריך:</b> {{ tour_date }}</p>
+    <p><b>🕘 שעה:</b> {{ tour_time }}</p>
+    <p><b>🎯 רמת קושי:</b> {{ tour_difficulty }}</p>
+    <p><b>🎒 ציוד נדרש:</b> {{ tour_equipment }}</p>
+    <p><b>🆔 קוד רישום:</b> <span style="color: #e74c3c;">{{ registration_code }}</span></p>
+
+    <hr>
+
+    <p style="text-align: center;">🧾 סרוק את קוד ה-QR הבא בעת ההגעה:</p>
+    <div style="text-align: center;">
+      <img src="cid:{{ qr_cid }}" alt="QR Code" style="width: 200px; height: 200px;">
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="{{ waze_link }}" style="background-color: #2980b9; color: white; padding: 12px 25px; text-decoration: none; border-radius: 6px;">📍 נווט עם Waze</a>
+    </div>
+
+    <hr>
+
+    <p><b>👨‍🏫 מדריך:</b> {{ guide_name }}</p>
+    <p><b>📞 טלפון:</b> <a href="tel:{{ guide_phone }}">{{ guide_phone }}</a></p>
+
+    <p style="font-size: small; color: #999;">מייל זה נשלח אוטומטית. אין להשיב אליו.</p>
+  </div>
+</body>
+</html>

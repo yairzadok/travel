@@ -1,0 +1,63 @@
+body {
+  background: linear-gradient(to bottom, #f8f9fa, #e0eafc);
+  min-height: 100vh;
+  font-family: 'Assistant', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+main.main-container {
+  padding-top: 70px;
+  padding-bottom: 2rem;
+  max-width: 1140px;
+  margin: auto;
+}
+
+/* קישורי ניווט */
+.nav-link-custom {
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 10px;
+  transition: color 0.3s;
+}
+
+.nav-link-custom:hover {
+  color: #ffc107;
+}
+
+/* עיצוב שורת הניווט */
+nav.navbar-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #007bff;
+  height: 60px;
+  border-bottom: 2px solid #0056b3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 100%;
+}
+
+.navbar-inner {
+  height: 100%;
+  max-width: 1140px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+/* כותרת תחתונה */
+footer.footer-custom {
+  background-color: #0056b3;
+  color: white;
+  font-size: 0.9rem;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+footer.footer-custom a {
+  color: #ffc107;
+  text-decoration: none;
+}

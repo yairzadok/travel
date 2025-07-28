@@ -1,0 +1,37 @@
+.info-box {
+  background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+  border-right: 5px solid #25D366;
+  border-radius: 15px;
+  padding: 20px;
+  font-size: 1.05rem;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+  color: #004d5d;
+
+  /* תוספות לרוחב */
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto; /* למרכז */
+}
+.container {
+  /* בטל את ההגבלה */
+  width: 100%;
+  max-width: none;
+  padding: 20px;
+}
+.card {
+  width: 100%;
+  max-width: none;
+  margin: auto;
+}
+
+.card {
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+.info-box-wrapper {
+  width: 100%;
+  padding: 30px 0;
+  background-color: #f0f4f8;
+}

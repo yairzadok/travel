@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}נרשמת בהצלחה!{% endblock %}
+
+{% block extra_head %}
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+<link href="{% static 'css/success.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="card mx-auto">
+    <div class="star mb-3">🌟</div>
+<p class="lead">
+        שלום <strong>{{ traveler_registration.traveler_first_name }} {{ traveler_registration.traveler_last_name }}</strong>,
+    </p>
+    <h1 class="text-success">נרשמת בהצלחה!</h1>
+<img src="{% static 'img/thank_you.png' %}"
+     alt="איור תודה"
+     width="100" height="100"
+     class="img-fluid mb-4">
+
+
+    <p class="mb-3">שלחנו לך מייל אישור.</p>
+    <p class="mb-1"><strong>📅 תאריך:</strong> {{ traveler_registration.tour.tour_date|date:"d/m/Y" }}</p>
+    <p class="mb-1"><strong>🗺️ שם הטיול:</strong> {{ traveler_registration.tour.tour_title }}</p>
+    <p class="mb-4"><strong>👨‍🏫 מדריך:</strong>
+    {% if traveler_registration.tour.tour_guide_name %}
+        {{ traveler_registration.tour.tour_guide_name.tour_guide_first_name }}
+        {{ traveler_registration.tour.tour_guide_name.tour_guide_last_name }}
+    {% else %}
+        לא הוגדר מדריך
+    {% endif %}
+</p>
+
+    <div class="success-box mt-4 p-3 bg-light border rounded">
+        <h2>✔️ התשלום הושלם בהצלחה</h2>
+        <p>תודה <strong>{{ payment.full_name }}</strong> על רכישת <strong>{{ payment.product.name }}</strong>.</p>
+        <p>התשלום בוצע בסך של <strong>₪{{ payment.product.price }}</strong> בתאריך <strong>{{ payment.paid_at|date:"d/m/Y H:i" }}</strong>.</p>
+    </div>
+
+    <a href="/" class="btn btn-home mt-4">חזרה לדף הבית 🏠</a>
+</div>
+{% endblock %}

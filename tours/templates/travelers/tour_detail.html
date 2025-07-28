@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ tour.tour_title }}{% endblock %}
+
+{% block extra_head %}
+  <link href="{% static 'css/tour_detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow p-4">
+
+    <!-- כותרת -->
+    <h2 class="text-primary">{{ tour.tour_title }}</h2>
+    <hr>
+    <h5 class="text-muted mb-4">{{ tour.tour_subtitle }}</h5>
+    <hr>
+
+    <!-- תמונה -->
+    {% if tour.tour_image %}
+    <img src="{{ tour.tour_image.url }}" class="img-fluid rounded mb-4" style="max-height: 400px; object-fit: cover;" alt="תמונה מהסיור">
+    {% endif %}
+    <hr>
+
+    <!-- תיאור -->
+    {% if tour.tour_description %}
+    <div class="mb-4">
+      <h5>📝 תיאור הסיור:</h5>
+      <p>{{ tour.tour_description|linebreaks }}</p>
+    </div>
+    {% endif %}
+
+    <!-- פרטי הסיור -->
+    <ul class="list-group mb-4">
+      <li class="list-group-item">
+        📅 <strong>תאריך:</strong> {{ tour.tour_date }}
+      </li>
+      <hr>
+      <li class="list-group-item">
+        🕒 <strong>שעת התחלה:</strong> {{ tour.tour_start_time }}
+        {% if tour.tour_end_time %} | <strong>שעת סיום משוערת:</strong> {{ tour.tour_end_time }} {% endif %}
+      </li>
+      <hr>
+      <li class="list-group-item">
+        👤 <strong>מדריך:</strong>
+        {% if tour.tour_guide_name %}
+          <a href="{% url 'guide_detail' guide_id=tour.tour_guide_name.id %}">{{ tour.tour_guide_name }}</a>
+        {% else %}
+          לא הוזן
+        {% endif %}
+      </li>
+      <hr>
+      <li class="list-group-item text-primary" style="cursor: pointer;">
+        💰 <strong>עלות:</strong> {{ tour.tour_price }} ₪
+      </li>
+      <hr>
+      <li class="list-group-item">
+        📍 <strong>מקום מפגש:</strong> {{ tour.meeting_point }}
+        {% if tour.google_maps_link %}
+        <a href="{{ tour.google_maps_link }}" class="btn btn-outline-primary btn-sm ms-2" target="_blank">הצג במפה</a>
+        {% endif %}
+      </li>
+      {% if tour.target_audience %}
+      <li class="list-group-item">
+        🎯 <strong>קהל יעד:</strong> {{ tour.target_audience }}
+      </li>
+      {% endif %}
+      {% if tour.difficulty_level %}
+      <li class="list-group-item">
+        ⛰️ <strong>רמת קושי:</strong> {{ tour.difficulty_level }}
+      </li>
+      {% endif %}
+      {% if tour.required_equipment %}
+      <li class="list-group-item">
+        🎒 <strong>ציוד נדרש:</strong> {{ tour.required_equipment }}
+      </li>
+      {% endif %}
+    </ul>
+
+    <!-- כפתור הרשמה -->
+    <div class="text-center">
+      <a href="{% url 'register' tour.pk %}" class="btn btn-success btn-lg">להרשמה לסיור</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- תיבת מידע מורחבת מחוץ ל-card -->
+<div class="info-box-wrapper mt-4">
+  <div class="info-box text-center">
+    <div style="font-size: 2rem; margin-bottom: 10px;">🟢</div>
+    <p><strong>לאחר הרישום:</strong> תקבלו אישור למייל עם פרטי הסיור, כולל איש קשר ונקודת מפגש.</p>
+    <p>💬 לקראת כל סיור תיפתח קבוצת WhatsApp ייעודית.</p>
+    <p>📩 תישלח גם הודעת תזכורת יום לפני הסיור.</p>
+  </div>
+</div>
+{% endblock %}

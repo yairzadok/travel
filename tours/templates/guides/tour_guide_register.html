@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load custom_filters static %}
+ {% block title%}רישום מדריך טיולים{% endblock %} 
+ {% block extra_head %}
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  rel="stylesheet"
+/>
+<link href="{% static 'css/tour_guide_register.css' %}" rel="stylesheet" />
+{% endblock %} {% block content %}
+<div class="form-container">
+  <h1 class="form-title">טופס רישום מדריך טיולים</h1>
+
+  <form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %} {% if form.non_field_errors %}
+    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    <!-- שדות חובה -->
+    <div class="mb-3">
+      <label for="id_first_name" class="form-label">שם פרטי</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-person"></i></span>
+        {{ form.tour_guide_first_name|add_class:"form-control" }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_last_name" class="form-label">שם משפחה</label>
+      <div class="input-group">
+        <span class="input-group-text"
+          ><i class="bi bi-person-bounding-box"></i
+        ></span>
+        {{ form.tour_guide_last_name|add_class:"form-control" }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_phone" class="form-label">טלפון נייד</label>
+      <div class="input-group">
+        <span class="input-group-text"
+          ><i class="bi bi-tour_guide_phone"></i
+        ></span>
+        {{ form.tour_guide_phone|add_class:"form-control" }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_email" class="form-label">כתובת מייל</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-envelope-at"></i></span>
+        {{ form.tour_guide_email|add_class:"form-control" }}
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="id_tour_guide_profile_picture" class="form-label"
+        >תמונת פרופיל</label
+      >
+      {{ form.tour_guide_profile_picture|add_class:"form-control" }}
+    </div>
+    <!-- קו הפרדה -->
+    <div class="form-section-title">שדות רשות</div>
+
+    <div class="mb-3">
+      <label for="id_languages" class="form-label">שפות הדרכה</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-translate"></i></span>
+        {{ form.languages|add_class:"form-control" }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_specialties" class="form-label">תחומי התמחות</label>
+      {{ form.specialties|add_class:"form-control" }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_experience" class="form-label">ניסיון מקצועי</label>
+      {{ form.experience|add_class:"form-control" }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_recommendations" class="form-label"
+        >המלצות או קישורים</label
+      >
+      {{ form.recommendations|add_class:"form-control" }}
+    </div>
+    <div class="mb-3">
+      <label for="id_facebook_link" class="form-label">קישור לדף פייסבוק</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-facebook"></i></span>
+        {{ form.facebook_link|add_class:"form-control" }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_instagram_link" class="form-label"
+        >קישור לדף אינסטגרם</label
+      >
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-instagram"></i></span>
+        {{ form.instagram_link|add_class:"form-control" }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_website_link" class="form-label">קישור לאתר אינטרנט</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-globe2"></i></span>
+        {{ form.website_link|add_class:"form-control" }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_whatsapp_link" class="form-label">קישור לוואטסאפ</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-whatsapp"></i></span>
+        {{ form.whatsapp_link|add_class:"form-control" }}
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">בצע רישום</button>
+  </form>
+</div>
+{% endblock %}
